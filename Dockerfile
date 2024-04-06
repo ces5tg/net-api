@@ -10,3 +10,4 @@ WORKDIR /publish
 COPY --from=build-env /publish .
 EXPOSE 8080  
 ENTRYPOINT ["dotnet", "MyMicroservice.dll"]
+    

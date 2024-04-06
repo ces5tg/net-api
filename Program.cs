@@ -1,5 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -55,7 +65,7 @@ app.MapGet("/api/{id}", async (HttpContext context, string id) =>
 .WithName("TenorSearch")
 .WithOpenApi();
 
-
+app.UseCors();
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
